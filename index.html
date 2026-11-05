@@ -95,6 +95,11 @@ footer{font-size:12.5px;color:var(--muted)}
 .sub .src{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:-2px}
 @media(max-width:640px){.sub{grid-template-columns:1fr 6em}.sub .nm{grid-column:1/-1}}
 .prinote{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+.sechead{margin:0;padding:12px 16px;background:var(--accent);color:var(--panel);font-family:var(--display,inherit);font-size:18px;font-weight:700;letter-spacing:.04em;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+.sechead small{font-size:13px;font-weight:500;opacity:.92;letter-spacing:0}
+#rows .row+.sechead{margin-top:22px}
+.thead .stages span,.thead>div{font-size:13px;font-weight:700;color:var(--fg);letter-spacing:0;white-space:nowrap}
+.legend b{font-size:13.5px;color:var(--fg)}
 </style>
 <div class="wrap">
 <header>
@@ -157,9 +162,9 @@ function render(){
       <div class="wide"><dt>これまでの動き</dt><dd><ul class="hist">${hist}</ul></dd></div>
       <div class="wide"><dt>出典</dt><dd>${links(it["出典URL"])}</dd></div>
     </dl></details>`};
-  const head=(t,SG)=>`<div class="thead"><div>${t}</div><div class="stages">${SG.map(x=>`<span>${x}</span>`).join("")}</div><div style="text-align:right">次の確認</div></div>`;
+  const head=(t,sub,SG)=>`<h3 class="sechead">${t}<small>${sub}</small></h3><div class="thead"><div>案件</div><div class="stages">${SG.map(x=>`<span>${x}</span>`).join("")}</div><div style="text-align:right">次の確認</div></div>`;
   const tech=items.filter(it=>it["分野コード"]!=="REG"),reg=items.filter(it=>it["分野コード"]==="REG");
-  document.getElementById("rows").innerHTML=(tech.length?head("新技術・商品",STAGES_T)+tech.map(rowHtml).join(""):"")+(reg.length?head("制度・補助金（来年度以降の制度が決まるまでの段階）",STAGES_R)+reg.map(rowHtml).join(""):"")||'<p style="padding:16px">この分野の案件はまだありません。</p>';
+  document.getElementById("rows").innerHTML=(tech.length?head("新技術・商品","発売前の新しい技術と商品",STAGES_T)+tech.map(rowHtml).join(""):"")+(reg.length?head("制度・補助金","来年度以降の制度が決まり、受付が始まるまでの段階",STAGES_R)+reg.map(rowHtml).join(""):"")||'<p style="padding:16px">この分野の案件はまだありません。</p>';
 }
 const SUB=[
 {"name":"給湯省エネ2026","who":"国（経済産業省）","lo":56,"hi":56,"asof":"2026-11-05","note":"うち撤去加算は撤去加算予算の27%。予約は11月16日まで","url":"https://kyutou-shoene2026.meti.go.jp/"},
