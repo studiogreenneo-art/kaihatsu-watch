@@ -85,6 +85,15 @@ footer{font-size:12.5px;color:var(--muted)}
   .row summary .trackcell{grid-column:1/-1;grid-row:2}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.subs{margin:28px 0 8px}.subs h2{margin:0 0 4px}.subs .note{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+.sub{display:grid;grid-template-columns:minmax(0,16em) 1fr 6em;gap:6px 14px;align-items:center;padding:10px 0;border-top:1px solid rgba(0,0,0,.08)}
+.sub .nm b{display:block;font-size:14px}.sub .nm small{color:var(--muted);font-size:12px}
+.sub .bar{height:14px;background:rgba(0,0,0,.07);border-radius:3px;position:relative;overflow:hidden}
+.sub .bar i{position:absolute;inset:0 auto 0 0;background:var(--s4);border-radius:3px}
+.sub .bar i.rng{background:repeating-linear-gradient(90deg,var(--s4) 0 6px,var(--s3) 6px 9px)}
+.sub .pct{text-align:right;white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums}
+.sub .src{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:-2px}
+@media(max-width:640px){.sub{grid-template-columns:1fr 6em}.sub .nm{grid-column:1/-1}}
 </style>
 <div class="wrap">
 <header>
@@ -96,6 +105,11 @@ footer{font-size:12.5px;color:var(--muted)}
 <div class="filters" role="group" aria-label="分野で絞り込み" id="filters"></div>
 <section class="board" aria-label="案件一覧">
     <div id="rows"></div>
+</section>
+<section class="subs" aria-label="今年度の補助金の申請状況">
+  <h2>今年度の補助金の申請状況</h2>
+  <p class="note">予算に対する申請額の割合です。数字は各事業事務局・市の公式ページの表示をそのまま載せています（国の事業は概算値で毎日更新）。予算の上限に達すると受付は終了します。</p>
+  <div id="subs"></div>
 </section>
 <div class="cols">
   <section><h2>次に確認する案件</h2><ul class="list" id="upcoming"></ul></section>
@@ -145,6 +159,14 @@ function render(){
   const tech=items.filter(it=>it["分野コード"]!=="REG"),reg=items.filter(it=>it["分野コード"]==="REG");
   document.getElementById("rows").innerHTML=(tech.length?head("新技術・商品",STAGES_T)+tech.map(rowHtml).join(""):"")+(reg.length?head("制度・補助金（来年度以降の制度が決まるまでの段階）",STAGES_R)+reg.map(rowHtml).join(""):"")||'<p style="padding:16px">この分野の案件はまだありません。</p>';
 }
+const SUB=[
+{"name":"給湯省エネ2026","who":"国（経済産業省）","lo":56,"hi":56,"asof":"2026-11-05","note":"うち撤去加算は撤去加算予算の27%。予約は11月16日まで","url":"https://kyutou-shoene2026.meti.go.jp/"},
+{"name":"先進的窓リノベ2026","who":"国（環境省）","lo":34,"hi":34,"asof":"2026-11-04","note":"","url":"https://window-renovation2026.env.go.jp/"},
+{"name":"みらいエコ住宅2026（リフォーム）","who":"国（国土交通省）","lo":12,"hi":12,"asof":"2026-11-04","note":"予約は11月16日まで","url":"https://mirai-eco2026.mlit.go.jp/"},
+{"name":"住まいのゼロカーボン推進補助金","who":"松本市","lo":80,"hi":90,"asof":"2026-11-04","note":"市のページでは「80〜90%」の幅で表示","url":"https://www.city.matsumoto.nagano.jp/soshiki/85/4406.html"},
+{"name":"住宅用地球温暖化対策設備設置補助金","who":"安曇野市","lo":85,"hi":85,"asof":"2026-11-02","note":"太陽光・蓄電池など。断熱・窓・給湯器は対象外","url":"https://www.city.azumino.nagano.jp/site/kankyo-gomi/10197.html"}
+];
+document.getElementById("subs").innerHTML=SUB.map(x=>{const pc=x.lo===x.hi?`${x.lo}%`:`${x.lo}〜${x.hi}%`;const host=x.url.replace(/^https?:\/\//,"").split("/")[0];return `<div class="sub"><div class="nm"><b>${esc(x.name)}</b><small>${esc(x.who)}</small></div><div class="bar" role="img" aria-label="${esc(pc)}"><i class="${x.lo===x.hi?"":"rng"}" style="width:${x.hi}%"></i></div><div class="pct">${esc(pc)}</div><div class="src">${esc(x.asof)}時点${x.note?"・"+esc(x.note):""}・出典 <a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(host)}</a></div></div>`}).join("");
 render();
 const byId=Object.fromEntries(D.items.map(i=>[i.ID,i]));
 document.getElementById("upcoming").innerHTML=[...D.items].sort((a,b)=>a["次の確認時期"].localeCompare(b["次の確認時期"])).slice(0,6)
