@@ -167,10 +167,10 @@ function render(){
   document.getElementById("rows").innerHTML=(tech.length?head("新技術・商品","発売前の新しい技術と商品",STAGES_T)+tech.map(rowHtml).join(""):"")+(reg.length?head("制度・補助金","来年度以降の制度が決まり、受付が始まるまでの段階",STAGES_R)+reg.map(rowHtml).join(""):"")||'<p style="padding:16px">この分野の案件はまだありません。</p>';
 }
 const SUB=[
-{"name":"給湯省エネ2026","who":"国（経済産業省）","lo":56,"hi":56,"asof":"2026-11-05","note":"うち撤去加算は撤去加算予算の27%。予約は11月16日まで","url":"https://kyutou-shoene2026.meti.go.jp/"},
-{"name":"先進的窓リノベ2026","who":"国（環境省）","lo":34,"hi":34,"asof":"2026-11-04","note":"","url":"https://window-renovation2026.env.go.jp/"},
-{"name":"みらいエコ住宅2026（リフォーム）","who":"国（国土交通省）","lo":12,"hi":12,"asof":"2026-11-04","note":"予約は11月16日まで","url":"https://mirai-eco2026.mlit.go.jp/"},
-{"name":"住まいのゼロカーボン推進補助金","who":"松本市","lo":80,"hi":90,"asof":"2026-11-04","note":"市のページでは「80〜90%」の幅で表示","url":"https://www.city.matsumoto.nagano.jp/soshiki/85/4406.html"},
+{"name":"給湯省エネ2026","who":"国（経済産業省）","lo":57,"hi":57,"asof":"2026-11-08","note":"うち撤去加算は撤去加算予算の28%。予約は11月16日まで","url":"https://kyutou-shoene2026.meti.go.jp/"},
+{"name":"先進的窓リノベ2026","who":"国（環境省）","lo":35,"hi":35,"asof":"2026-11-08","note":"","url":"https://window-renovation2026.env.go.jp/"},
+{"name":"みらいエコ住宅2026（リフォーム）","who":"国（国土交通省）","lo":13,"hi":13,"asof":"2026-11-08","note":"予約は11月16日まで","url":"https://mirai-eco2026.mlit.go.jp/"},
+{"name":"住まいのゼロカーボン推進補助金","who":"松本市","lo":80,"hi":90,"asof":"2026-11-06","note":"市のページでは「80〜90%」の幅で表示","url":"https://www.city.matsumoto.nagano.jp/soshiki/85/4406.html"},
 {"name":"住宅用地球温暖化対策設備設置補助金","who":"安曇野市","lo":85,"hi":85,"asof":"2026-11-02","note":"太陽光・蓄電池など。断熱・窓・給湯器は対象外","url":"https://www.city.azumino.nagano.jp/site/kankyo-gomi/10197.html"}
 ];
 document.getElementById("subs").innerHTML=SUB.map(x=>{const pc=x.lo===x.hi?`${x.lo}%`:`${x.lo}〜${x.hi}%`;const host=x.url.replace(/^https?:\/\//,"").split("/")[0];return `<div class="sub"><div class="nm"><b>${esc(x.name)}</b><small>${esc(x.who)}</small></div><div class="bar" role="img" aria-label="${esc(pc)}"><i class="${x.lo===x.hi?"":"rng"}" style="width:${x.hi}%"></i></div><div class="pct">${esc(pc)}</div><div class="src">${esc(x.asof)}時点${x.note?"・"+esc(x.note):""}・出典 <a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(host)}</a></div></div>`}).join("");
