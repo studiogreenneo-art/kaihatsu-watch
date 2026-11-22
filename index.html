@@ -167,10 +167,10 @@ function render(){
   document.getElementById("rows").innerHTML=(tech.length?head("新技術・商品","発売前の新しい技術と商品",STAGES_T)+tech.map(rowHtml).join(""):"")+(reg.length?head("制度・補助金","来年度以降の制度が決まり、受付が始まるまでの段階",STAGES_R)+reg.map(rowHtml).join(""):"")||'<p style="padding:16px">この分野の案件はまだありません。</p>';
 }
 const SUB=[
-{"name":"給湯省エネ2026","who":"国（経済産業省）","lo":60,"hi":60,"asof":"2026-11-19","note":"うち撤去加算は撤去加算予算の30%。予約は11月16日まで（終了）、交付申請は遅くとも12月31日まで","url":"https://kyutou-shoene2026.meti.go.jp/"},
-{"name":"先進的窓リノベ2026","who":"国（環境省）","lo":38,"hi":38,"asof":"2026-11-19","note":"交付申請は遅くとも12月31日まで","url":"https://window-renovation2026.env.go.jp/"},
-{"name":"みらいエコ住宅2026（リフォーム）","who":"国（国土交通省）","lo":16,"hi":16,"asof":"2026-11-19","note":"予約は11月16日まで（終了）、交付申請は遅くとも12月31日まで","url":"https://mirai-eco2026.mlit.go.jp/"},
-{"name":"信州健康ゼロエネ住宅助成金（リフォームタイプ）","who":"長野県","lo":66,"hi":66,"asof":"2026-11-17","note":"残り約27件。受付は2027年1月29日まで（予算額に達した日に終了、超えた場合は抽選の場合あり）","url":"https://www.shinshu0ene.jp/info/docs/2873.html"},
+{"name":"給湯省エネ2026","who":"国（経済産業省）","lo":61,"hi":61,"asof":"2026-11-22","note":"うち撤去加算は撤去加算予算の30%。予約は11月16日まで（終了）、交付申請は遅くとも12月31日まで","url":"https://kyutou-shoene2026.meti.go.jp/"},
+{"name":"先進的窓リノベ2026","who":"国（環境省）","lo":39,"hi":39,"asof":"2026-11-22","note":"交付申請は遅くとも12月31日まで","url":"https://window-renovation2026.env.go.jp/"},
+{"name":"みらいエコ住宅2026（リフォーム）","who":"国（国土交通省）","lo":16,"hi":16,"asof":"2026-11-22","note":"予約は11月16日まで（終了）、交付申請は遅くとも12月31日まで","url":"https://mirai-eco2026.mlit.go.jp/"},
+{"name":"信州健康ゼロエネ住宅助成金（リフォームタイプ）","who":"長野県","lo":67,"hi":67,"asof":"2026-11-20","note":"残り約27件。受付は2027年1月29日まで（予算額に達した日に終了、超えた場合は抽選の場合あり）","url":"https://www.shinshu0ene.jp/info/docs/2877.html"},
 {"name":"住まいのゼロカーボン推進補助金","who":"松本市","lo":80,"hi":90,"asof":"2026-11-06","note":"11月13日時点の表示は画像で読み取れず、11月6日時点の「80〜90%」のまま（最新は市のページでご確認ください）","url":"https://www.city.matsumoto.nagano.jp/soshiki/85/4406.html"},
 {"name":"住宅用地球温暖化対策設備設置補助金","who":"安曇野市","lo":91,"hi":91,"asof":"2026-11-13","note":"太陽光・蓄電池など。断熱・窓・給湯器は対象外","url":"https://www.city.azumino.nagano.jp/site/kankyo-gomi/10197.html"}
 ];
